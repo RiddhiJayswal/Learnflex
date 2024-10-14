@@ -23,7 +23,7 @@ function ViewCourse({params}) {
   }
   return (
     <div className='flex'>
-        <div className='w-64 border shadow-sm h-screen z-50'>
+        <div className='w-72 border shadow-sm h-screen z-50'>
           <ChapterNav course={course} userCourse={userCourse}/>
         </div>
         <div>

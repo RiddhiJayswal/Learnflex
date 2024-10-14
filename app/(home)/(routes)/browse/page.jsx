@@ -6,7 +6,7 @@ import CourseList from './_components/CourseList';
 
 function Browse() {
 
-  const [courses,setCourses]=useState([]);
+  const [courses, setCourses] = useState(null);
   useEffect(() => {
     getCourses();
   }, []);
