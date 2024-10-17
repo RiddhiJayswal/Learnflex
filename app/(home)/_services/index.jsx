@@ -4,25 +4,25 @@ const MASTER_URL="https://api-ap-south-1.hygraph.com/v2/"+process.env.NEXT_PUBLI
 
 export const getCourseList=async()=>{
     const query=gql`
-    query courseList {
-        courseLists {
-        banner {
-             url
-        }
-        id
-        author
-        free
-        name
-        tags
-        totalChapters
-        }
+   query courseList {
+  courseLists {
+    banner {
+      url
     }
+    id
+    author
+    free
+    name
+    tags
+    totalChapters
+  }
+}
     `
-    const result=await request(MASTER_URL,query);
+    const result = await request (MASTER_URL,query);
     return result;
 }
 
-export const getCourseById=async(id,userEmail)=>{
+export const getCourseById = async(id,userEmail)=>{
     const query = gql`
     query course {
     courseList(where: {id: "`+id+`"}) {
@@ -40,7 +40,6 @@ export const getCourseById=async(id,userEmail)=>{
     name
     id
     free
-    author
     totalChapters
   }
   userEnrollCourses(where: {courseId: "`+id+`", userEmail: "`+userEmail+`"}) {
@@ -50,7 +49,7 @@ export const getCourseById=async(id,userEmail)=>{
   }
 }
  `
-    const result=await request(MASTER_URL,query);
+    const result = await request(MASTER_URL,query);
     return result;
 }
 
@@ -59,7 +58,7 @@ export const getCourseById=async(id,userEmail)=>{
 export const EnrollCourse=async(courseId,userEmail)=>{
   const mutationQuery=gql`
   mutation EnrollCourse {
-  createUserEnrollCourse(data: {userEmail: "`+userEmail+`", courseId: "`+courseId+`"}) {
+  createUserEnrollCourse(data: {userEmail: "`+courseId+`", courseId: "`+userEmail+`"}) {
     id
   }
 }
@@ -71,12 +70,10 @@ return result;
 export const PublishCourse=async(id)=>{
   const mutationQuery=gql`
   mutation EnrollCourse {
-  publishUserEnrollCourse(where: {id: "`+id+`"})
-  {
+  publishUserEnrollCourse(where: {id: "`+id+`"}) {
     id
   }
-}
-`
+}`
 const result=await request(MASTER_URL,mutationQuery);
 return result;
 }

@@ -58,3 +58,4 @@ function EnrollmentSection({ courseDetail, userCourse }) {
 }
 
 export default EnrollmentSection;
+
